@@ -7,21 +7,15 @@ package controller;
 
 import dal.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import model.Product;
 
-/*
- *
- * @author Admin
- */
-@WebServlet(name = "HomeServlet", urlPatterns = {"/home"})
-public class HomeServlet extends HttpServlet {
+
+public class Home extends HttpServlet {
      private ProductDAO productDao = new ProductDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
