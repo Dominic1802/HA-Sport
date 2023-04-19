@@ -71,7 +71,7 @@
         }
     </style>
     <body>
-        <div class="footer">
+<!--        <div class="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-5">
@@ -95,10 +95,7 @@
                 </div>
 
             </div>
-
-
-
-        </div> 
+        </div> -->
         <p class="text-center">© 2023 HA_Sport.com. All Rights Reserved.</p>
     </body>
 </html>
