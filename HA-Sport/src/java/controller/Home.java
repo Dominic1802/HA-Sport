@@ -20,8 +20,8 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        List<Product> list = productDao.getAllProduct();
-//        request.setAttribute("listProduct", list);
+        List<Product> list = productDao.getAllProduct();
+        request.setAttribute("listProduct", list);
         request.getRequestDispatcher("Home.jsp").forward(request, response);
     }
 

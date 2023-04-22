@@ -1,3 +1,5 @@
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>  
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
@@ -185,9 +187,14 @@
                 </div>
             </div>
         </section>
+       
 
+        <!--================ start footer Area  =================-->
         <%@include file="./Footer.jsp" %>
-        
+        <!--================ End footer Area  =================-->
+
+
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="./static/js/jquery-3.2.1.min.js"></script>
