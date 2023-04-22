@@ -15,7 +15,7 @@ import java.util.List;
 import model.Product;
 
 
-public class Home extends HttpServlet {
+public class HomeServlet extends HttpServlet {
      private ProductDAO productDao = new ProductDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
