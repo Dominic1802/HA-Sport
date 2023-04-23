@@ -36,4 +36,17 @@ public class AccountDAO extends DBContext{
         }
         return null;
     }
+    
+     public void updatePassword(int id,String password)
+    {
+        String sql = "update Accounts \n"
+                + "set accountPass = '"+ password+"' "
+                + "where accountId = "+id;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+
+        }
+    }
 }
