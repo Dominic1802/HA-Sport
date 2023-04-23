@@ -160,5 +160,29 @@ public class ProductDAO extends DBContext {
 
         return st;
     }
+ public List<Product> getTopView() {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT Top(3) * FROM Products ORDER BY proView DESC";
+        try {
 
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getDate(6),
+                        rs.getString(8),
+                        (new CategoryDAO()).getCategoryById(rs.getInt(7)),
+                        rs.getInt(9), 0);
+                list.add(product);
+
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 }
