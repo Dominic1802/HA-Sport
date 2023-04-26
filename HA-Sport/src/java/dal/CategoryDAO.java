@@ -1,5 +1,8 @@
 package dal;
-
+/**
+ *
+ * @author 84868
+ */
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,19 +31,32 @@ public class CategoryDAO extends DBContext {
         return list;
     }
 
+//    public void createCategory(Category category) {
+//        String sql = "insert into Categories values(?,?,?)";
+//        try {
+//            ps = connection.prepareStatement(sql);
+//            ps.setString(1, category.getCatName());
+//            ps.setString(2, category.getCatImage());
+//            ps.setString(3, category.getCatDes());
+//            ps.executeUpdate();
+//        } catch (SQLException e) {
+//        }
+//    }
     public void createCategory(Category category) {
-        String sql = "insert into categories values(?,?,?)";
-        try {
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, category.getCatName());
-            ps.setString(2, category.getCatImage());
-            ps.setString(3, category.getCatDes());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-        }
+    String sql = "INSERT INTO Categories (catName,catImage,catDes) VALUES (?,?,?)";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, category.getCatName());
+        ps.setString(2, category.getCatImage());
+        ps.setString(3, category.getCatDes());
+        ps.executeUpdate();
+        ps.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
     public void updateCategory(Category category){
-        String sql = "update categories\n"
+        String sql = "update Categories\n"
                 + " set catName = '" + category.getCatName()
                
                 + "', catDes = '" + category.getCatDes()
@@ -63,7 +79,7 @@ public class CategoryDAO extends DBContext {
         }
     }
     public void deleteCategory(int id) {
-        String sql = "delete from categories where catId = " + id;
+        String sql = "delete from Categories where catId = " + id;
         try {
             ps = connection.prepareStatement(sql);
             ps.executeUpdate();
@@ -73,7 +89,7 @@ public class CategoryDAO extends DBContext {
 
     public Category getCategoryById(int id)
     {
-        String sql = "select * from categories where catId = "+id;
+        String sql = "select * from Categories where catId = "+id;
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();

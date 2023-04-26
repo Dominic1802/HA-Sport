@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package dal;
-
+/**
+ *
+ * @author 84868
+ */
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

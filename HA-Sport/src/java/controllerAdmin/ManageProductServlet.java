@@ -11,6 +11,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.sql.Date;
 import model.Category;
 import model.Product;
 
@@ -18,7 +23,7 @@ import model.Product;
  *
  * @author 84868
  */
-public class UpdateProductServlet extends HttpServlet {
+public class ManageProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +42,10 @@ public class UpdateProductServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateProductServlet</title>");
+            out.println("<title>Servlet ManageProductServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateProductServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ManageProductServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,11 +63,7 @@ public class UpdateProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("proId"));
-        ProductDAO proDao = new ProductDAO();
-        Product product = proDao.getProductById(id);
-        request.setAttribute("product", product);
-        request.getRequestDispatcher("Update-Product.jsp").forward(request, response);
+        request.getRequestDispatcher("Manage-Product.jsp").forward(request, response);
     }
 
     @Override
@@ -71,16 +72,54 @@ public class UpdateProductServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        int proId = Integer.parseInt(request.getParameter("proId"));
-        String proName = request.getParameter("proname");
-        double proPrice = Double.parseDouble(request.getParameter("proprice"));
-        String proDes = request.getParameter("prodes");
-        int catId = Integer.parseInt(request.getParameter("catId"));
-        int proQua2 = Integer.parseInt(request.getParameter("proQua2"));
-        Product product = new Product(proId, proName, proPrice, proDes, catId, null, proDes, new Category(catId, "", "", ""), 0, proQua2);
-        ProductDAO proDao = new ProductDAO();
-        proDao.updateProduct(product);
-        response.sendRedirect("manage-product");
+        try {
+            String proName = request.getParameter("proname");
+            double proPrice = Double.parseDouble(request.getParameter("proprice"));
+
+            String proDes = request.getParameter("prodes");
+            Date proCreate = Date.valueOf(request.getParameter("prodate"));
+            int catId = Integer.parseInt(request.getParameter("catId"));
+
+            int proQua = Integer.parseInt(request.getParameter("proQua"));
+            for (Part part : request.getParts()) {
+                InputStream is = request.getPart(part.getName()).getInputStream();
+                int i = is.available();
+                byte[] b = new byte[i];
+                is.read(b);
+                String fileName = getFileName(part);
+                if (fileName == null) {
+                    continue;
+                }
+                String rootPath = "C:/Users/Admin/Documents/TP_Shop/web/images/products/" + proName;
+                File theDir = new File(rootPath);
+                if (!theDir.exists()) {
+                    theDir.mkdirs();
+                }
+                String fileWay = rootPath + "/" + fileName;
+                FileOutputStream os = new FileOutputStream(fileWay);
+                os.write(b);
+                is.close();
+                Category cat = new Category(catId, "", "", "");
+                Product product = new Product(1, proName, proPrice, proDes, 0, proCreate, "./images/products/" + proName + "/" + fileName, cat, 0, proQua);
+                (new ProductDAO()).createProduct(product);
+                break;
+            }
+        } catch (Exception e) {
+        } finally {
+            response.sendRedirect("manage-product");
+        }
+    }
+
+    private String getFileName(Part part) {
+        String partHeader = part.getHeader("content-disposition");
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                return cd.substring(cd.indexOf('=') + 1).trim()
+                        .replace("\"", "");
+            }
+        }
+        return null;
+
     }
 
     /**

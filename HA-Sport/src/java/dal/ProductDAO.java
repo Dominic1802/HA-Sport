@@ -43,6 +43,33 @@ public class ProductDAO extends DBContext {
         return null;
     }
 
+    public void createProduct(Product product) {
+        String sql = "insert into products values(?,?,?,?,?,?,?,?,?)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, product.getProName());
+            ps.setDouble(2, product.getProPrice());
+            ps.setString(3, product.getProDes());
+            ps.setInt(4, product.getProView());
+            ps.setDate(5, product.getProCreate());
+            ps.setInt(6, product.getCategory().getCatId());
+            ps.setString(7, product.getProImg());
+            ps.setInt(8, product.getProSelled());
+            ps.setInt(9, product.getProQuantity());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
+    public void deleteProduct(int id) {
+        String sql = "delete from products where proId = " + id;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
     public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
         String sql = "select * from Products";
@@ -117,7 +144,8 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
- // Extension
+
+    // Extension
     private String addCategoryID(String sql, int CategoryID) {
         StringBuilder sb = new StringBuilder(sql);
         if (CategoryID > 0) {
@@ -160,9 +188,79 @@ public class ProductDAO extends DBContext {
 
         return st;
     }
- public List<Product> getTopView() {
+
+    public void increaseView(int proId) {
+        String sql = "update Products\n"
+                + "set proView = proView +1 \n"
+                + "where proId = " + proId;
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public List<Product> getTopView() {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT Top(3) * FROM Products ORDER BY proView DESC";
+        try {
+
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getDate(6),
+                        rs.getString(8),
+                        (new CategoryDAO()).getCategoryById(rs.getInt(7)),
+                        rs.getInt(9), 0);
+                list.add(product);
+
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void addSelled(Product product) {
+        String sql = "update Products\n"
+                + "set proSelled = proSelled +" + product.getProQuantity() + " where proId = " + product.getProId();
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void updateProduct(Product product) {
+        String sql = "update Products\n"
+                + " set proName ='" + product.getProName()
+                + "', proPrice =" + product.getProPrice()
+                + ", proDes ='" + product.getProDes()
+                + "', catId =" + product.getCategory().getCatId()
+                + ", quantity =" + product.getProQuantity()
+                + " where proId = " + product.getProId();
+        try {
+            System.out.println("sql : " + sql);
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public List<Product> getTopSelled() {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT Top(3) * FROM Products ORDER BY proSelled DESC";
         try {
 
             ps = connection.prepareStatement(sql);

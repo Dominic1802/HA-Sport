@@ -63,6 +63,7 @@ public class AccountDAO extends DBContext {
 
         }
     }
+
     public void createAccount(Account account) {
         String sql = "insert into Accounts values(?,?,?,0,null,null,null,null)";
         try {
@@ -72,7 +73,17 @@ public class AccountDAO extends DBContext {
             ps.setBoolean(3, account.isIsAdmin());
             System.out.println("aaaaaaaaaaa");
             ps.executeUpdate();
-            System.out.println("sql: " + sql );
+            System.out.println("sql: " + sql);
+        } catch (SQLException e) {
+
+        }
+    }
+
+    public void deleteAccountById(int id) {
+        String sql = "delete from accounts where accountId = " + id;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
         } catch (SQLException e) {
 
         }

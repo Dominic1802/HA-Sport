@@ -4,21 +4,19 @@
  */
 package controllerAdmin;
 
-import dal.ProductDAO;
+import dal.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Category;
-import model.Product;
 
 /**
  *
  * @author 84868
  */
-public class UpdateProductServlet extends HttpServlet {
+public class DeleteAccountServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +35,10 @@ public class UpdateProductServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateProductServlet</title>");
+            out.println("<title>Servlet DeleteAccountServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateProductServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteAccountServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,29 +56,24 @@ public class UpdateProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("proId"));
-        ProductDAO proDao = new ProductDAO();
-        Product product = proDao.getProductById(id);
-        request.setAttribute("product", product);
-        request.getRequestDispatcher("Update-Product.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
-        int proId = Integer.parseInt(request.getParameter("proId"));
-        String proName = request.getParameter("proname");
-        double proPrice = Double.parseDouble(request.getParameter("proprice"));
-        String proDes = request.getParameter("prodes");
-        int catId = Integer.parseInt(request.getParameter("catId"));
-        int proQua2 = Integer.parseInt(request.getParameter("proQua2"));
-        Product product = new Product(proId, proName, proPrice, proDes, catId, null, proDes, new Category(catId, "", "", ""), 0, proQua2);
-        ProductDAO proDao = new ProductDAO();
-        proDao.updateProduct(product);
-        response.sendRedirect("manage-product");
+       AccountDAO dao = new AccountDAO();
+        int id = Integer.parseInt(request.getParameter("accountId"));
+        dao.deleteAccountById(id);
+        response.sendRedirect("manage-account");
     }
 
     /**

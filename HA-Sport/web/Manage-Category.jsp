@@ -60,7 +60,7 @@
                             <td>
                                 <form>
                                     <input type="hidden" name="catId" value="${item.catId}"/>
-                                    <button class="btn btn-primary text-light mr-5"formaction="update-category">
+                                    <button class="btn btn-primary text-light mr-5" formaction="update-category">
                                         Update
                                     </button>
                                     <button class="btn btn-danger text-light ml-5" formaction="delete-category" formmethod="post">
