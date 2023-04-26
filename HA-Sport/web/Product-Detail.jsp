@@ -50,7 +50,7 @@
                     </div>
                     <div  class="col-7">
                         <h1>${product.proName}</h1>
-                        <span>${product.proView} people see this product.</span><br />
+                       <%--" <span>${product.proView} people see this product.</span><br />"--%>
                         <span> sold ${product.proSelled} products.</span><br />
                         <br />
                         <strong>Create Date: </strong> ${product.proCreate}
@@ -74,7 +74,7 @@
             </div>
         </form>
                         
-                        
+        <%--"                
         <div class="container">
             <h2 style="margin-top: 70px">Top View Products</h2>
             <div class="row">
@@ -106,8 +106,8 @@
                 </div> <!-- col.// -->
                 </c:forEach>
                 
-            </div>
-        </div>
+            </div>"
+        </div>--%>
         <%@include file="./Footer.jsp" %>
 
         <!--===============================================================================================-->

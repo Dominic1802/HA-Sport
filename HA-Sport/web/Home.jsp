@@ -100,7 +100,7 @@
         <!--================End Home Banner Area =================-->
 
         <!--================Hot Deals Area =================-->
-        <section id="hot_deals" class="hot_deals_area section_gap">
+       <%--" <section id="hot_deals" class="hot_deals_area section_gap">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6">
@@ -186,7 +186,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>"--%>"
        
 
         <!--================ start footer Area  =================-->
