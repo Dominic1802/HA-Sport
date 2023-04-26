@@ -23,7 +23,6 @@ import model.Account;
  *
  * @author 84868
  */
-@WebServlet(name = "SignUp", urlPatterns = {"/signup"})
 public class SignUpServlet extends HttpServlet {
 
     @Override
