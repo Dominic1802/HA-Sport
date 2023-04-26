@@ -56,7 +56,7 @@
                                         <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
                                     </div>
                                 </div>
-                                <article class="filter-group">
+                                <%--" <article class="filter-group">
                                     <header class="card-header">
                                         <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="" >
                                             <i class="icon-control fa fa-chevron-down"></i>
@@ -85,7 +85,7 @@
                                             </div>
                                         </div> <!-- card-body.// -->
                                     </div>
-                                </article> <!-- filter-group  .// -->
+                                </article> <!-- filter-group  .// -->"--%>
 
                                 <article class="filter-group">
                                     <header class="card-header">

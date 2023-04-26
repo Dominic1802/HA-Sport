@@ -63,4 +63,18 @@ public class AccountDAO extends DBContext {
 
         }
     }
+    public void createAccount(Account account) {
+        String sql = "insert into Accounts values(?,?,?,0,null,null,null,null)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, account.getAccountName());
+            ps.setString(2, account.getAccountPass());
+            ps.setBoolean(3, account.isIsAdmin());
+            System.out.println("aaaaaaaaaaa");
+            ps.executeUpdate();
+            System.out.println("sql: " + sql );
+        } catch (SQLException e) {
+
+        }
+    }
 }

@@ -58,10 +58,10 @@ public class PayServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         AccountDAO acc = new AccountDAO();
-        acc.setCustomer(account, email, fullName, phone, address);
+//        acc.setCustomer(account, email, fullName, phone, address);
         ProductDAO productDAO = new ProductDAO();
         for (Product product : order.getProIds()) {
-            productDAO.addSelled(product);
+//            productDAO.addSelled(product);
         }
         orderDAO.changeCartToOrder(order.getOrderId());
         response.sendRedirect("home");

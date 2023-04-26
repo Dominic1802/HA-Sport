@@ -80,7 +80,7 @@
         </header>
 
         <!--================Home Banner Area =================-->
-        <section class="home_banner_area" style="background: url(static/img/hinh_nen.jpeg)">
+        <section class="home_banner_area" style="background: url(static/img/hinhnen.jpg)">
             <img alt=""/>
             <div class="overlay"></div>
             <div class="banner_inner d-flex align-items-center">
