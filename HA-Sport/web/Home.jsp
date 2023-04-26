@@ -78,7 +78,6 @@
                 </div>
             </nav>
         </header>
-
         <!--================Home Banner Area =================-->
         <section class="home_banner_area" style="background: url(static/img/hinhnen.jpg)">
             <img alt=""/>
@@ -89,9 +88,7 @@
                         <div class="offset-lg-2 col-lg-8">
                             <h3>Welcome to
                                 <br />HA-Sport</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                            <a class="white_bg_btn" href="#">View Collection</a>
+                            <a class="white_bg_btn" href="#">View Shop</a>
                         </div>
                     </div>
                 </div>

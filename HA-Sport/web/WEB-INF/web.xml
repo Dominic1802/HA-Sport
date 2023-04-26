@@ -44,6 +44,14 @@
         <servlet-name>SignUpServlet</servlet-name>
         <servlet-class>controller.SignUpServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeAdminServlet</servlet-name>
+        <servlet-class>controllerAdmin.HomeAdminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerCategoryServlet</servlet-name>
+        <servlet-class>controllerAdmin.ManagerCategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/HomeServlet</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeAdminServlet</servlet-name>
+        <url-pattern>/home_admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerCategoryServlet</servlet-name>
+        <url-pattern>/manage-category</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

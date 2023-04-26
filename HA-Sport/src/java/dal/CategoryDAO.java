@@ -28,8 +28,52 @@ public class CategoryDAO extends DBContext {
         return list;
     }
 
-    public Category getCategoryById(int id) {
-        String sql = "select * from categories where catId = " + id;
+    public void createCategory(Category category) {
+        String sql = "insert into categories values(?,?,?)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, category.getCatName());
+            ps.setString(2, category.getCatImage());
+            ps.setString(3, category.getCatDes());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    public void updateCategory(Category category){
+        String sql = "update categories\n"
+                + " set catName = '" + category.getCatName()
+               
+                + "', catDes = '" + category.getCatDes()
+                
+                + "' where catId = " + category.getCatId();
+        try {
+            System.out.println("sql : "+ sql);
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    
+ public void deleteProductCatId(int id) {
+        String sql = "delete from Products where catId = " + id;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    public void deleteCategory(int id) {
+        String sql = "delete from categories where catId = " + id;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
+    public Category getCategoryById(int id)
+    {
+        String sql = "select * from categories where catId = "+id;
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
